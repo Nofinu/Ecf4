@@ -28,7 +28,7 @@ public class CelestialObjectServiceTest {
     }
 
     @Test
-    void testCreateNewCelestialObject (){
+    void testCreateNewCelestialObjectExpectCelestialObject (){
         CelestialObjectRequestDto celestialObjectRequestDto = new CelestialObjectRequestDto("test");
         CelestialObject celestialObject = new CelestialObject(null,"test");
         Mockito.when(celestialObjectRepository.save(celestialObject)).thenReturn(new CelestialObject(1,"test"));
@@ -36,21 +36,21 @@ public class CelestialObjectServiceTest {
     }
 
     @Test
-    void testFindByIdWithIdInDataBaseExceptCelestialObject () {
+    void testFindByIdWithIdInDataBaseExpectCelestialObject () {
         Optional<CelestialObject> celestialObjectOptional = Optional.of(new CelestialObject(1,"test"));
         Mockito.when(celestialObjectRepository.findById(1)).thenReturn(celestialObjectOptional);
         Assertions.assertEquals(new CelestialObject(1,"test"),celestialObjectService.findById(1));
     }
 
     @Test
-    void testFindByIdWithIdNotInDataBaseExceptNotFoundException () {
+    void testFindByIdWithIdNotInDataBaseExpectNotFoundException () {
         Optional<CelestialObject> celestialObjectOptional = Optional.empty();
         Mockito.when(celestialObjectRepository.findById(1)).thenReturn(celestialObjectOptional);
         Assertions.assertThrows(NotFoundException.class,()-> celestialObjectService.findById(1));
     }
 
     @Test
-    void testUpdateWithIdInDataBaseExceptCelestialObjectUpdate () {
+    void testUpdateWithIdInDataBaseExpectCelestialObjectUpdate () {
         Optional<CelestialObject> celestialObjectOptional = Optional.of(new CelestialObject(1,"test"));
         CelestialObjectRequestDto celestialObjectRequestDto = new CelestialObjectRequestDto("update");
         CelestialObject celestialObjectfind = new CelestialObject(1,"update");
@@ -60,21 +60,21 @@ public class CelestialObjectServiceTest {
     }
 
     @Test
-    void testUpdateWithIdNotInDataBaseExceptNotFoundException () {
+    void testUpdateWithIdNotInDataBaseExpectNotFoundException () {
         CelestialObjectRequestDto celestialObjectRequestDto = new CelestialObjectRequestDto("update");
         Mockito.when(celestialObjectRepository.findById(1)).thenThrow(NotFoundException.class);
         Assertions.assertThrows(NotFoundException.class,()->celestialObjectService.update(celestialObjectRequestDto,1));
     }
 
     @Test
-    void testfindByNameWithNameInDataBaseExceptCelestialObjectUpdate () {
+    void testfindByNameWithNameInDataBaseExpectCelestialObjectUpdate () {
         Optional<CelestialObject> celestialObjectOptional = Optional.of(new CelestialObject(1,"test"));
         Mockito.when(celestialObjectRepository.findByName("test")).thenReturn(celestialObjectOptional);
         Assertions.assertEquals(new CelestialObject(1,"test"),celestialObjectService.findByName("test"));
     }
 
     @Test
-    void testfindByNameWithNameNotInDataBaseExceptNotFoundException() {
+    void testfindByNameWithNameNotInDataBaseExpectNotFoundException() {
         Mockito.when(celestialObjectRepository.findByName("test")).thenThrow(NotFoundException.class);
         Assertions.assertThrows(NotFoundException.class,()->celestialObjectService.findByName("test"));
     }

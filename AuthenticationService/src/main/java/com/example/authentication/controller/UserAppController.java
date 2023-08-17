@@ -1,10 +1,7 @@
 package com.example.authentication.controller;
 
 
-import com.example.authentication.dto.LoginRequestDto;
-import com.example.authentication.dto.LoginResponseDto;
-import com.example.authentication.dto.RegisterRequestDto;
-import com.example.authentication.dto.RegisterResponseDto;
+import com.example.authentication.dto.*;
 import com.example.authentication.entity.UserApp;
 import com.example.authentication.security.JWTGenerator;
 import com.example.authentication.service.UserAppService;
